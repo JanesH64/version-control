@@ -1,4 +1,10 @@
-<h1>Version control is working!</h1>
-
-<h2>Data: {{data}}</h2>
-<button (click)="getHello()">GetData</button>
+<mat-toolbar color="primary">
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Version Control</span>
+    <span class="spacer"></span>
+</mat-toolbar>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

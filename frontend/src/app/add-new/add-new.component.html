@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Create new {{data.heading}}</h1>
+<div class="flex-center">
+    <form>
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input [formControl]="nameControl" cdkFocusInitial matInput/>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-button (click)="create()" color="primary">Create</button>
+</div>

@@ -1,0 +1,14 @@
+<mat-action-list>
+    <div class="flex-row">
+      <span mat-subheader>Files</span>
+      <span class="spacer"></span>
+      <button mat-icon-button>
+        <mat-icon>upload</mat-icon>
+      </button>
+    </div>
+    <button mat-list-item *ngFor="let file of files"
+     [routerLink]="['files', file.id]">
+      <mat-icon mat-list-icon>description</mat-icon>
+      <div mat-line>{{file.title}}</div>    
+    </button>
+</mat-action-list>
