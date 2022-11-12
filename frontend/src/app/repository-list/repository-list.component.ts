@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddNewComponent } from '../add-new/add-new.component';
 import { Repository } from '../models/repository';
-import { ErrorHandlerService } from '../services/error-handler.service';
+import { ErrorHandlerService } from '../services/error/error-handler.service';
 
 @Component({
   selector: 'app-repository-list',

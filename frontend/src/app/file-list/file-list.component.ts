@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { File } from '../models/file';
 
 @Component({
@@ -26,7 +28,8 @@ export class FileListComponent implements OnInit, OnDestroy {
   public files: Array<File> = [this.file1, this.file2]
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +40,10 @@ export class FileListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
       this.paramsSub.unsubscribe();
+  }
+
+  openUploadDialog(): void {
+    this.dialog.open(FileUploadComponent);
   }
 
 }

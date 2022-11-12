@@ -23,6 +23,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { RepositoryDetailsComponent } from './repository-details/repository-details.component';
 import { FileDetailsComponent } from './file-details/file-details.component';
 import { RepositoryComponent } from './repository/repository.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { RepositoryComponent } from './repository/repository.component';
     ErrorDialogComponent,
     RepositoryDetailsComponent,
     FileDetailsComponent,
-    RepositoryComponent
+    RepositoryComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
