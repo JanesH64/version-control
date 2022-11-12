@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddDialogData } from './addDialogData';
 
@@ -10,7 +10,7 @@ import { AddDialogData } from './addDialogData';
 })
 export class AddNewComponent implements OnInit {
 
-  nameControl: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)])
+  nameControl: UntypedFormControl = new UntypedFormControl('', [Validators.required, Validators.minLength(1)])
 
   constructor(
     public dialogRef: MatDialogRef<AddNewComponent>,
