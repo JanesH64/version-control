@@ -19,6 +19,8 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar'; 
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDividerModule} from '@angular/material/divider'; 
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 
@@ -58,7 +60,9 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     ReactiveFormsModule,
     MaterialFileInputModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule,
+    MatDividerModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {delay: 200}}

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FileDetailsComponent } from './file-details/file-details.component';
-import { FileListComponent } from './file-list/file-list.component';
 import { RepositoryDetailsComponent } from './repository-details/repository-details.component';
 import { RepositoryListComponent } from './repository-list/repository-list.component';
 import { RepositoryComponent } from './repository/repository.component';

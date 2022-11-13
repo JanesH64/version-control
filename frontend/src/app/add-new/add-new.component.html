@@ -9,5 +9,5 @@
 </div>
 <div mat-dialog-actions align="end">
     <button mat-button (click)="cancel()">Cancel</button>
-    <button mat-button (click)="create()" color="primary">Create</button>
+    <button mat-button [disabled]="!nameControl.value" (click)="create()" color="primary">Create</button>
 </div>

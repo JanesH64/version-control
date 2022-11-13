@@ -4,11 +4,26 @@
   </button>
   <mat-action-list>
       <span mat-subheader class="list-header">Repositories</span>
-    <button mat-list-item *ngFor="let repository of repositories"
-      [routerLink]="['/repositories', repository.id]">
-      <mat-icon mat-list-icon>folder</mat-icon>
-      <div mat-line>{{repository.name}}</div>    
-    </button>
+      <div class="flex-row" *ngFor="let repository of repositories">
+        <button mat-list-item [routerLink]="['/repositories', repository.id]">
+          <mat-icon mat-list-icon>folder</mat-icon>
+          <div mat-line>{{repository.name}}</div>   
+        </button> 
+        <div class="spacer"></div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            <span>Rename</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </button>
+        </mat-menu>
+      </div>
   </mat-action-list>
 </div>
   

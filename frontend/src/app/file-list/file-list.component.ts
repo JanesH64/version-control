@@ -43,7 +43,9 @@ export class FileListComponent implements OnInit, OnDestroy {
   }
 
   openUploadDialog(): void {
-    this.dialog.open(FileUploadComponent);
+    this.dialog.open(FileUploadComponent).afterClosed().subscribe(() => {
+      //reload
+    })
   }
 
 }
