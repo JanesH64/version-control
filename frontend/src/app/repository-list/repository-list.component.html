@@ -1,15 +1,14 @@
-<mat-action-list>
-  <div class="flex-row">
-    <span mat-subheader>Repositories</span>
-    <span class="spacer"></span>
-    <button mat-icon-button (click)="addNewRepository()">
-      <mat-icon>add</mat-icon>
+<div class="site-container">
+  <button mat-fab color="primary" class="action-button" (click)="addNewRepository()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <mat-action-list>
+      <span mat-subheader class="list-header">Repositories</span>
+    <button mat-list-item *ngFor="let repository of repositories"
+      [routerLink]="['/repositories', repository.id]">
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <div mat-line>{{repository.name}}</div>    
     </button>
-  </div>
-  <button mat-list-item *ngFor="let repository of repositories"
-   [routerLink]="['/repositories', repository.id]">
-    <mat-icon mat-list-icon>folder</mat-icon>
-    <div mat-line>{{repository.name}}</div>    
-</button>
-</mat-action-list>
+  </mat-action-list>
+</div>
   

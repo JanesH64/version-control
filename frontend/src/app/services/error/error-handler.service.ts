@@ -1,5 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { ErrorDialogComponent } from '../../error-dialog/error-dialog.component';
 import { ErrorData } from '../../models/errorData';
 
@@ -9,10 +11,18 @@ import { ErrorData } from '../../models/errorData';
 export class ErrorHandlerService {
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
     ) { }
 
-  public handleError(message: string): void {
+  snackBarConfig: MatSnackBarConfig = {
+    horizontalPosition: "center",
+      verticalPosition: "bottom",
+      panelClass: "error-snackbar",
+      duration: 3000
+  }
+
+  openErrorDialog(message: string): void {
     let data: ErrorData = {
       message: message
     };
@@ -20,5 +30,13 @@ export class ErrorHandlerService {
     this.dialog.open(ErrorDialogComponent, {
       data: data
     });
+  }
+
+  handleErrorMessage(error: string): void {
+    this.snackBar.open(error, "Read", this.snackBarConfig);
+  }
+
+  handleHttpErrorResponse(error: HttpErrorResponse): void {
+    this.snackBar.open(error.message, "Read", this.snackBarConfig);
   }
 }

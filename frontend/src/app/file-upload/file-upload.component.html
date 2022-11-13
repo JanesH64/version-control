@@ -1,1 +1,17 @@
-<p>file-upload works!</p>
+<h1 mat-dialog-title>Upload file</h1>
+<div class="flex-center">
+    <form>
+        <mat-form-field>
+            <ngx-mat-file-input [formControl]="fileControl" placeholder="File" [accept]="'.txt'" matInput></ngx-mat-file-input>
+            <!-- <input [formControl]="fileControl" matInput/> -->
+            <mat-icon matSuffix>folder</mat-icon>
+        </mat-form-field>
+    </form>
+    <mat-progress-bar class="progress-bar" mode="determinate"
+                    [value]="uploadProgress" *ngIf="uploadInProgress">
+  </mat-progress-bar>
+</div>
+<div mat-dialog-actions align="end"> 
+    <button mat-button (click)="closeDialog()">Cancel</button>
+    <button mat-button [disabled]="disableUpload()" (click)="startUpload()" color="primary">Upload</button>
+</div>

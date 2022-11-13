@@ -51,7 +51,7 @@ export class RepositoryListComponent implements OnInit {
 
       let existingRepository = this.repositories.find(repo => repo.name === result);
       if(existingRepository) {
-        this.errorHandlerService.handleError("Repository already exists!");
+        this.errorHandlerService.handleErrorMessage("Repository already exists!");
       }
     });
   }

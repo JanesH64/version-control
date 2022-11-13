@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -12,4 +13,35 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.success-snackbar {
+    background: rgb(60, 197, 42);
+    color: white;
+}
+
+.success-snackbar .mat-simple-snackbar-action {
+    color: white !important;
+}
+
+.error-snackbar {
+    background: rgb(217, 32, 32);
+    color: white;
+}
+
+.error-snackbar .mat-simple-snackbar-action {
+    color: white !important;
+}
+
+.action-button {
+    position:absolute; 
+    float: right;
+}
+
+.site-container {
+    position: relative;
+}
+
+.list-header {
+    margin-bottom: 20px !important;
 }

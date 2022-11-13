@@ -13,10 +13,14 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
+
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 import { AddNewComponent } from './add-new/add-new.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
@@ -51,9 +55,14 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialFileInputModule,
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {delay: 200}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
