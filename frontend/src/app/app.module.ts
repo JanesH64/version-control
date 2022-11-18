@@ -21,6 +21,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider'; 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 
@@ -62,7 +63,8 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     MatProgressBarModule,
     MatSnackBarModule,
     MatMenuModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {delay: 200}}

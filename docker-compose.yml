@@ -1,12 +1,16 @@
 
 version: '3'
 services:
-  api:
-    build: ./backend
-  app:
-    build: ./frontend
+  mongo:
+    image: mongo:5.0.7
+    restart: unless-stopped
     ports:
-      - 80:80
-      - 443:443
-    depends_on:
-      - api
+      - 27017:27017
+    volumes:
+      - ./data/mongo:/data/db
+  # app:
+  #   build: .
+  #   ports:
+  #     - 8181:8181
+  #   depends_on:
+  #     - mongo
