@@ -5,8 +5,8 @@ import { UntypedFormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { debounce } from 'rxjs';
 import { ErrorHandlerService } from '../services/error/error-handler.service';
+import { FileService } from '../services/file/file.service';
 import { NotificationService } from '../services/notification/notification.service';
-import { UploadService } from '../services/upload/upload.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -24,7 +24,7 @@ export class FileUploadComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<FileUploadComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private uploadService: UploadService,
+    private fileService: FileService,
     private notificationService: NotificationService,
     private errorHandlerService: ErrorHandlerService
   ) { }
@@ -41,7 +41,7 @@ export class FileUploadComponent implements OnInit {
 
     this.uploadProgress = 0;
     this.uploadInProgress = true;
-    const upload$ = this.uploadService.uploadFile(file);
+    const upload$ = this.fileService.upload(file);
 
     this.uploadSub = upload$.subscribe(
       event => {

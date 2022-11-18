@@ -3,7 +3,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
-import { File } from '../models/file';
+import { TextFile } from '../models/textFile';
+import { FileService } from '../services/file/file.service';
 
 @Component({
   selector: 'app-file-list',
@@ -15,37 +16,37 @@ export class FileListComponent implements OnInit, OnDestroy {
   public repositoryId: string = "";
   private paramsSub: any;
 
-  public file1: File = {
-    id: "1",
-    title: "Testfile 1"
-  }
-
-  public file2: File = {
-    id: "2",
-    title: "Testfile 2"
-  }
-
-  public files: Array<File> = [this.file1, this.file2]
+  public files: Array<TextFile> = [];
+  public isLoading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private fileService: FileService
   ) { }
 
   ngOnInit(): void {
     this.paramsSub = this.route.params.subscribe(params => {
       this.repositoryId = params['repositoryid'];
+      this.loadFiles();
+    });
+  }
+
+  loadFiles(): void {
+    this.isLoading = true;
+    this.fileService.getAll().subscribe((files) => {
+      this.files = files;
+      this.isLoading = false;
+    })
+  }
+  openUploadDialog(): void {
+    this.dialog.open(FileUploadComponent).afterClosed().subscribe(() => {
+      this.loadFiles();
     })
   }
 
   ngOnDestroy(): void {
-      this.paramsSub.unsubscribe();
-  }
-
-  openUploadDialog(): void {
-    this.dialog.open(FileUploadComponent).afterClosed().subscribe(() => {
-      //reload
-    })
+    this.paramsSub.unsubscribe();
   }
 
 }

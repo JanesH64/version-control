@@ -7,7 +7,7 @@
     <button mat-list-item *ngFor="let file of files"
     [routerLink]="['files', file.id]">
       <mat-icon mat-list-icon>description</mat-icon>
-      <div mat-line>{{file.title}}</div>    
+      <div mat-line>{{file.name}}</div>    
     </button>
   </mat-action-list>
 </div>
