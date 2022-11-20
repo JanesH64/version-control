@@ -14,14 +14,14 @@ export class FileService {
     private httpClient: HttpClient
   ) { }
 
-  getAll(): Observable<Array<TextFile>> {
-    return this.httpClient.get<Array<TextFile>>(`${environment.api}/files`);
+  getAll(repositoryId: string): Observable<Array<TextFile>> {
+    return this.httpClient.get<Array<TextFile>>(`${environment.api}/files/${repositoryId}`);
   }
 
-  upload(file: File) {
+  upload(file: File, repositoryId: string) {
       const formData = new FormData();
       formData.append("file", file);
-      return this.httpClient.post(`${environment.api}/files`, formData, {
+      return this.httpClient.post(`${environment.api}/files/${repositoryId}`, formData, {
         reportProgress: true,
         observe: 'events'
       });

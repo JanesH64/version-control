@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class File {
     @Id
     public String id;
+    public String repositoryId;
     public String name;
     public String creationDate;
     public String lastUpdate;
@@ -22,8 +23,9 @@ public class File {
     public File() {
     }
 
-    public File(MultipartFile file) {
+    public File(String repositoryId, MultipartFile file) {
         id = UUID.randomUUID().toString();
+        this.repositoryId = repositoryId;
         name = file.getOriginalFilename();
         data = toBinary(file);
     }

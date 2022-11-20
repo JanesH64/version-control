@@ -4,10 +4,12 @@
   </button>
   <mat-action-list>
     <span mat-subheader class="list-header">Files</span>
-    <button mat-list-item *ngFor="let file of files"
-    [routerLink]="['files', file.id]">
-      <mat-icon mat-list-icon>description</mat-icon>
-      <div mat-line>{{file.name}}</div>    
-    </button>
+    <div class="scrollable-content">
+      <button mat-list-item *ngFor="let file of files"
+      [routerLink]="['files', file.id]">
+        <mat-icon mat-list-icon>description</mat-icon>
+        <div mat-line>{{file.name}}</div>    
+      </button>
+    </div>
   </mat-action-list>
 </div>

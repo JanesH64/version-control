@@ -10,25 +10,27 @@
         </div>
       </ng-container>
       <ng-container *ngIf="!isLoading">
-        <div class="flex-row" *ngFor="let repository of repositories">
-          <button mat-list-item [routerLink]="['/repositories', repository.id]">
-            <mat-icon mat-list-icon>folder</mat-icon>
-            <div mat-line>{{repository.name}}</div>   
-          </button> 
-          <div class="spacer"></div>
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-              <mat-icon>edit</mat-icon>
-              <span>Rename</span>
+        <div class="scrollable-content">
+          <div class="flex-row" *ngFor="let repository of repositories">
+            <button mat-list-item [routerLink]="['/repositories', repository.id]">
+              <mat-icon mat-list-icon>folder</mat-icon>
+              <div mat-line>{{repository.name}}</div>   
+            </button> 
+            <div class="spacer"></div>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
             </button>
-            <button mat-menu-item (click)="deleteRepository(repository.id)">
-              <mat-icon>delete</mat-icon>
-              <span>Delete</span>
-            </button>
-          </mat-menu>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>edit</mat-icon>
+                <span>Rename</span>
+              </button>
+              <button mat-menu-item (click)="deleteRepository(repository.id)">
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </div>
         </div>
       </ng-container>
   </mat-action-list>

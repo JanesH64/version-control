@@ -34,13 +34,17 @@ export class FileListComponent implements OnInit, OnDestroy {
 
   loadFiles(): void {
     this.isLoading = true;
-    this.fileService.getAll().subscribe((files) => {
+    this.fileService.getAll(this.repositoryId).subscribe((files) => {
       this.files = files;
       this.isLoading = false;
     })
   }
   openUploadDialog(): void {
-    this.dialog.open(FileUploadComponent).afterClosed().subscribe(() => {
+    this.dialog.open(FileUploadComponent, {
+      data: {
+        repositoryId: this.repositoryId
+      }
+    }).afterClosed().subscribe(() => {
       this.loadFiles();
     })
   }

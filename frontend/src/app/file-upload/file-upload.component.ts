@@ -41,7 +41,7 @@ export class FileUploadComponent implements OnInit {
 
     this.uploadProgress = 0;
     this.uploadInProgress = true;
-    const upload$ = this.fileService.upload(file);
+    const upload$ = this.fileService.upload(file, this.data.repositoryId);
 
     this.uploadSub = upload$.subscribe(
       event => {
