@@ -1,9 +1,9 @@
 package com.dvelop.versioncontrol.controller;
 
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +24,20 @@ public class FileController {
     public List<File> GetAll(@PathVariable("repositoryid") String repositoryId) {
         return fileService.getAll(repositoryId);
     }
+
+    @GetMapping("/api/files/{repositoryid}/{fileid}")
+    public File GetById(@PathVariable("repositoryid") String repositoryId, @PathVariable("fileid") String fileId) {
+        return fileService.getById(repositoryId, fileId);
+    }
     
     @PostMapping("/api/files/{repositoryid}")
-    public void Upload(@PathVariable("repositoryid") String repositoryId, @RequestParam("file") MultipartFile dto) {
-        fileService.create(repositoryId, dto);
+    public ResponseEntity<String> Upload(@PathVariable("repositoryid") String repositoryId, @RequestParam("file") MultipartFile dto) {
+        boolean success = fileService.create(repositoryId, dto);
+
+        if(!success) {
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

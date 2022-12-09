@@ -3,7 +3,6 @@ package com.dvelop.versioncontrol.services.Files;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +31,12 @@ public class FileService implements IFileService {
     }
 
     @Override
+    public File getById(String repositoryId, String fileId) {
+        return fileStore.getById(fileId);
+    }
+
+    @Override
     public boolean create(String repositoryId, MultipartFile dto) {
-        fileStore.deleteAll();
         if(repositoryId == null || repositoryId.trim().isEmpty()) {
             return false;
         }

@@ -1,5 +1,5 @@
 import { NumberInput } from '@angular/cdk/coercion';
-import { HttpEventType } from '@angular/common/http';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -43,25 +43,45 @@ export class FileUploadComponent implements OnInit {
     this.uploadInProgress = true;
     const upload$ = this.fileService.upload(file, this.data.repositoryId);
 
-    this.uploadSub = upload$.subscribe(
-      event => {
+    // this.uploadSub = upload$.subscribe(
+    //   event => {
+    //     if (event.type == HttpEventType.UploadProgress) {
+    //       if (event.total) {  
+    //         this.uploadProgress = Math.round(100 * (event.loaded / event.total));   
+    //       }   
+
+    //       if(this.uploadProgress === 100) {
+    //         setTimeout(() => {
+    //           this.closeDialog();
+    //           this.notificationService.success("Upload succeeded!");
+    //         }, 500);
+    //       }
+    //     }
+    //   },
+    //   error => {
+    //     this.errorHandlerService.handleHttpErrorResponse(error);
+    //     this.uploadInProgress = false;
+    //     this.uploadSub.unsubscribe();
+    //   });
+
+    this.uploadSub = upload$.subscribe({
+      next: (event: any) => {
         if (event.type == HttpEventType.UploadProgress) {
           if (event.total) {  
             this.uploadProgress = Math.round(100 * (event.loaded / event.total));   
           }   
-
-          if(this.uploadProgress === 100) {
-            setTimeout(() => {
-              this.closeDialog();
-              this.notificationService.success("Upload succeeded!");
-            }, 500);
-          }
+        } else if (event instanceof HttpResponse) {
+          setTimeout(() => {
+            this.notificationService.success("Upload succeeded!");
+            this.closeDialog();
+          }, 500);
         }
       },
-      error => {
-        this.errorHandlerService.handleHttpErrorResponse(error);
+      error: (error: any) => {
         this.uploadInProgress = false;
-      });
+        this.errorHandlerService.handleHttpErrorResponse(error);
+      }
+    });
   }
 
   closeDialog(): void {

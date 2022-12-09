@@ -9,6 +9,7 @@ import com.dvelop.versioncontrol.models.File;
 public interface IFileService {
     public List<File> getAll();
     public List<File> getAll(String repositoryId);
+    public File getById(String repositoryId, String fileId);
     public boolean create(String repositoryId, MultipartFile dto);
     public boolean update(String repositoryId, String fileId, MultipartFile dto);
 }

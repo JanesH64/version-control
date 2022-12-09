@@ -18,6 +18,10 @@ export class FileService {
     return this.httpClient.get<Array<TextFile>>(`${environment.api}/files/${repositoryId}`);
   }
 
+  getById(repositoryId: string, fileId: string): Observable<TextFile> {
+    return this.httpClient.get<TextFile>(`${environment.api}/files/${repositoryId}/${fileId}`);
+  }
+
   upload(file: File, repositoryId: string) {
       const formData = new FormData();
       formData.append("file", file);

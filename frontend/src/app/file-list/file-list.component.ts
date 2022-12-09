@@ -39,6 +39,7 @@ export class FileListComponent implements OnInit, OnDestroy {
       this.isLoading = false;
     })
   }
+  
   openUploadDialog(): void {
     this.dialog.open(FileUploadComponent, {
       data: {

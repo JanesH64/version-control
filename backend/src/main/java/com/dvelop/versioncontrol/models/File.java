@@ -1,9 +1,7 @@
 package com.dvelop.versioncontrol.models;
 
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
-
-import org.bson.BsonBinarySubType;
-import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +16,8 @@ public class File {
     public String lastUpdate;
     public String[] tags;
     public boolean head;
-    public Binary data;
+    public byte[] data;
+    public String content;
 
     public File() {
     }
@@ -27,14 +26,9 @@ public class File {
         id = UUID.randomUUID().toString();
         this.repositoryId = repositoryId;
         name = file.getOriginalFilename();
-        data = toBinary(file);
-    }
-
-    private Binary toBinary(MultipartFile file) {
         try {
-            return new Binary(BsonBinarySubType.BINARY, file.getBytes());
+            content = new String(file.getBytes(), StandardCharsets.UTF_8);
         } catch (Exception e) {
-            return null;
         }
     }
 }

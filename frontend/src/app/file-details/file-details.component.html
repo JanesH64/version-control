@@ -1,1 +1,20 @@
-<p>file-details works!</p>
+<!-- <div *ngIf="file">
+  <p style="white-space: pre-line; color: black">
+    {{file.content}}
+  </p>
+</div> -->
+
+
+<div class="page-container">
+  <div class="page">
+    <p *ngIf="file" class="text-content">
+      {{file.content}}
+    </p>
+  </div>
+  <div *ngIf="file" class="file-info">
+    <h1 class="file-header">{{file.name}}</h1>
+    <div class="details">
+
+    </div>
+  </div>
+</div>
