@@ -22,6 +22,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider'; 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import {MatTabsModule} from '@angular/material/tabs'; 
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 
@@ -31,6 +32,7 @@ import { RepositoryDetailsComponent } from './repository-details/repository-deta
 import { FileDetailsComponent } from './file-details/file-details.component';
 import { RepositoryComponent } from './repository/repository.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { FileMetadataComponent } from './file-metadata/file-metadata.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     RepositoryDetailsComponent,
     FileDetailsComponent,
     RepositoryComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    FileMetadataComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,8 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     MatSnackBarModule,
     MatMenuModule,
     MatDividerModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {delay: 200}}

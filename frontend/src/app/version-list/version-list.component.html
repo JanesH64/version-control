@@ -1,1 +1,11 @@
-<p>version-list works!</p>
+<div class="site-container">
+    <mat-action-list>
+        <span mat-subheader class="list-header">Versions</span>
+        <div class="scrollable-content" *ngIf="file">
+            <button mat-list-item *ngFor="let version of file.versions">
+                <mat-icon mat-list-icon>description</mat-icon>
+                <div mat-line>{{version.lastUpdate}}</div>
+            </button>
+        </div>
+    </mat-action-list>
+</div>

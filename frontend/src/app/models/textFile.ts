@@ -1,5 +1,8 @@
+import { FileData } from "./fileData";
+
 export interface TextFile {
     id: string;
     name: string;
-    content?: string;
+    head: FileData;
+    versions: Array<FileData>;
 }

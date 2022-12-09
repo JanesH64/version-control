@@ -8,13 +8,20 @@
 <div class="page-container">
   <div class="page">
     <p *ngIf="file" class="text-content">
-      {{file.content}}
+      {{file.head.content}}
     </p>
   </div>
   <div *ngIf="file" class="file-info">
     <h1 class="file-header">{{file.name}}</h1>
-    <div class="details">
-
+    <div class="tab-container">
+      <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="Metadata">
+          <app-file-metadata></app-file-metadata>
+        </mat-tab>
+        <mat-tab label="Version">
+          <app-version-list [file]="file"></app-version-list>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>

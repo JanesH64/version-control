@@ -23,11 +23,15 @@ export class FileService {
   }
 
   upload(file: File, repositoryId: string) {
-      const formData = new FormData();
-      formData.append("file", file);
-      return this.httpClient.post(`${environment.api}/files/${repositoryId}`, formData, {
-        reportProgress: true,
-        observe: 'events'
-      });
+    const formData = new FormData();
+    formData.append("file", file);
+    return this.httpClient.post(`${environment.api}/files/${repositoryId}`, formData, {
+      reportProgress: true,
+      observe: 'events'
+    });
+  }
+
+  getVersions(repositoryId: string, fileId: string) {
+    return this.httpClient.get<Array<TextFile>>(`${environment.api}/versions/${repositoryId}/${fileId}`)
   }
 }
