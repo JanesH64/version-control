@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FileData } from '../models/fileData';
 import { TextFile } from '../models/textFile';
 import { FileService } from '../services/file/file.service';
 
@@ -18,5 +19,13 @@ export class VersionListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+   
+  }
+
+  dateSortFn(a: FileData, b: FileData): Number {
+    let aDate = new Date(a.creationDate);
+    let bDate = new Date(a.creationDate);
+
+    return aDate.valueOf() - bDate.valueOf();
   }
 }

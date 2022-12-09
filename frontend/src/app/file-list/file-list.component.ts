@@ -54,4 +54,11 @@ export class FileListComponent implements OnInit, OnDestroy {
     this.paramsSub.unsubscribe();
   }
 
+  sortByNameFn(a: TextFile, b: TextFile): Number {
+    if(a?.name < b?.name) return -1;
+    if(a?.name > b?.name) return 1;
+
+    return 0;
+  }
+
 }

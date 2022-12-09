@@ -19,21 +19,17 @@ public class File {
     public String name;
     public FileData head;
     public List<FileData> versions;
-    public String lastUpdate;
     public File() {
     }
 
     public File(String repositoryId, MultipartFile file) {
-        this.id = UUID.randomUUID().toString();
+        id = UUID.randomUUID().toString();
         this.repositoryId = repositoryId;
-        this.name = file.getOriginalFilename();
+        name = file.getOriginalFilename();
         versions = new ArrayList<FileData>();
 
         FileData version= new FileData(file);
-        this.versions.add(version);
-        this.head = version;
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        this.lastUpdate = formatter.format(Calendar.getInstance().getTime());
+        versions.add(version);
+        head = version;
     }
 }

@@ -1,6 +1,7 @@
 package com.dvelop.versioncontrol.models;
 
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -8,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileData {
     public String creationDate;
+    public String lastUpdate;
     public String[] tags;
     public boolean head;
     public byte[] data;
@@ -15,8 +17,9 @@ public class FileData {
 
     public FileData() {}
     public FileData(MultipartFile file) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        creationDate = formatter.format(Calendar.getInstance().getTime());
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+        creationDate = df.format(Calendar.getInstance().getTime());
+        lastUpdate = df.format(Calendar.getInstance().getTime());
         head = true;
         try {
             data = file.getBytes();

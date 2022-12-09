@@ -33,6 +33,7 @@ import { FileDetailsComponent } from './file-details/file-details.component';
 import { RepositoryComponent } from './repository/repository.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FileMetadataComponent } from './file-metadata/file-metadata.component';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { FileMetadataComponent } from './file-metadata/file-metadata.component';
     FileDetailsComponent,
     RepositoryComponent,
     FileUploadComponent,
-    FileMetadataComponent
+    FileMetadataComponent,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,

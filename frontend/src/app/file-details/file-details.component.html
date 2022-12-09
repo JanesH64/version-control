@@ -1,27 +1,36 @@
-<!-- <div *ngIf="file">
-  <p style="white-space: pre-line; color: black">
-    {{file.content}}
-  </p>
-</div> -->
-
-
-<div class="page-container">
-  <div class="page">
-    <p *ngIf="file" class="text-content">
-      {{file.head.content}}
-    </p>
+<div class="flex-container">
+  <div class="toolbar-actions">
+    <div>
+      <h1 class="file-header">{{file?.name}}</h1>
+    </div>
+    <div class="spacer"></div>
+    <button mat-mini-fab color="primary" title="Download file">
+      <mat-icon>download</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary" title="Upload file">
+      <mat-icon>upload</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary" title="Delete file">
+      <mat-icon>delete</mat-icon>
+    </button>
   </div>
-  <div *ngIf="file" class="file-info">
-    <h1 class="file-header">{{file.name}}</h1>
-    <div class="tab-container">
-      <mat-tab-group mat-stretch-tabs>
-        <mat-tab label="Metadata">
-          <app-file-metadata></app-file-metadata>
-        </mat-tab>
-        <mat-tab label="Version">
-          <app-version-list [file]="file"></app-version-list>
-        </mat-tab>
-      </mat-tab-group>
+  <div class="page-container">
+    <div *ngIf="file" class="file-info">
+      <div class="tab-container">
+        <mat-tab-group mat-stretch-tabs>
+          <mat-tab label="Metadata">
+            <app-file-metadata></app-file-metadata>
+          </mat-tab>
+          <mat-tab label="Version">
+            <app-version-list [file]="file"></app-version-list>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+    <div class="page">
+      <p *ngIf="file" class="text-content">
+        {{file.head.content}}
+      </p>
     </div>
   </div>
 </div>

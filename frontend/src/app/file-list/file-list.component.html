@@ -5,10 +5,11 @@
   <mat-action-list>
     <span mat-subheader class="list-header">Files</span>
     <div class="scrollable-content">
-      <button mat-list-item *ngFor="let file of files"
+      <button mat-list-item *ngFor="let file of files | orderBy:sortByNameFn"
       [routerLink]="['files', file.id]">
         <mat-icon mat-list-icon>description</mat-icon>
-        <div mat-line>{{file.name}}</div>    
+        <div mat-line>{{file.name}}</div> 
+        <div mat-subheader>Last Update: {{file.head.lastUpdate}}</div>   
       </button>
     </div>
   </mat-action-list>
