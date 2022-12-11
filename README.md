@@ -3,7 +3,7 @@ University project: Simple version control for text files
 
 ## Requirements
 - [ ] Save files in different versions 
-- [] Get file with or without a lock 
+- [ ] Get file with or without a lock 
 - [ ] Upload and update an existing file and release the lock 
 - [x] Upload new files 
 - [ ] Access and restore old versions 
