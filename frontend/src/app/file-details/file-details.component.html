@@ -16,16 +16,7 @@
   </div>
   <div class="page-container">
     <div *ngIf="file" class="file-info">
-      <div class="tab-container">
-        <mat-tab-group mat-stretch-tabs>
-          <mat-tab label="Metadata">
-            <app-file-metadata></app-file-metadata>
-          </mat-tab>
-          <mat-tab label="Version">
-            <app-version-list [file]="file"></app-version-list>
-          </mat-tab>
-        </mat-tab-group>
-      </div>
+      <app-version-list [file]="file"></app-version-list>
     </div>
     <div class="page">
       <p *ngIf="file" class="text-content">
