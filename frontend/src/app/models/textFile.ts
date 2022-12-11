@@ -4,5 +4,5 @@ export interface TextFile {
     id: string;
     name: string;
     head: FileData;
-    versions: Array<FileData>;
+    versions: Map<string, FileData>;
 }

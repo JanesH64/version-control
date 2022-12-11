@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TextFile } from '../models/textFile';
 import { FileService } from '../services/file/file.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-file-details',
@@ -39,4 +40,7 @@ export class FileDetailsComponent implements OnInit {
     })
   }
 
+  downloadFile(): void {
+    this.fileService.downloadVersion(this.file?.id, this.file?.head.id).subscribe(blob => saveAs(blob, this.file?.name));;
+  }
 }

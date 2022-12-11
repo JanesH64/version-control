@@ -8,6 +8,7 @@ import java.util.Calendar;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileData {
+    public String id;
     public String creationDate;
     public String lastUpdate;
     public String[] tags;

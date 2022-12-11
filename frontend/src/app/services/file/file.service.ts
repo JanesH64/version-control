@@ -3,13 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TextFile } from 'src/app/models/textFile';
 import { environment } from 'src/environments/environment';
-import { ErrorHandlerService } from '../error/error-handler.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
-
   constructor(
     private httpClient: HttpClient
   ) { }
@@ -33,5 +31,11 @@ export class FileService {
 
   getVersions(repositoryId: string, fileId: string) {
     return this.httpClient.get<Array<TextFile>>(`${environment.api}/versions/${repositoryId}/${fileId}`)
+  }
+
+  downloadVersion(fileId: string | undefined, id: string | undefined): Observable<Blob> {
+    return this.httpClient.get(`${environment.api}/files/${fileId}/version/${id}`, {
+      responseType: 'blob'
+    });
   }
 }

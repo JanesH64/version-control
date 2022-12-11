@@ -20,3 +20,6 @@ Content-Type: application/json
     "name": "Test Repo New name",
     "files": []
 }
+
+####
+GET http://localhost:8181/api/files/d73bccd2-4dab-49bf-8617-0674522fcc41/version/v0

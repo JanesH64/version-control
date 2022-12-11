@@ -1,11 +1,7 @@
 package com.dvelop.versioncontrol.models;
 
-import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,7 +14,7 @@ public class File {
     public String repositoryId;
     public String name;
     public FileData head;
-    public List<FileData> versions;
+    public Map<String, FileData> versions;
     public File() {
     }
 
@@ -26,10 +22,11 @@ public class File {
         id = UUID.randomUUID().toString();
         this.repositoryId = repositoryId;
         name = file.getOriginalFilename();
-        versions = new ArrayList<FileData>();
+        versions = new HashMap<String, FileData>();
 
         FileData version= new FileData(file);
-        versions.add(version);
+        version.id = "v" + versions.size();
+        versions.put(version.id, version);
         head = version;
     }
 }

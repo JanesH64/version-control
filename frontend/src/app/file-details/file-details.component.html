@@ -4,7 +4,7 @@
       <h1 class="file-header">{{file?.name}}</h1>
     </div>
     <div class="spacer"></div>
-    <button mat-mini-fab color="primary" title="Download file">
+    <button mat-mini-fab color="primary" title="Download file" (click)="downloadFile()">
       <mat-icon>download</mat-icon>
     </button>
     <button mat-mini-fab color="primary" title="Upload file">

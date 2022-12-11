@@ -26,12 +26,12 @@ public class FileController {
     }
 
     @GetMapping("/api/files/{repositoryid}/{fileid}")
-    public File GetById(@PathVariable("repositoryid") String repositoryId, @PathVariable("fileid") String fileId) {
+    public File GetFile(@PathVariable("repositoryid") String repositoryId, @PathVariable("fileid") String fileId) {
         return fileService.getById(repositoryId, fileId);
     }
     
     @PostMapping("/api/files/{repositoryid}")
-    public ResponseEntity<String> Upload(@PathVariable("repositoryid") String repositoryId, @RequestParam("file") MultipartFile dto) {
+    public ResponseEntity<String> NewFile(@PathVariable("repositoryid") String repositoryId, @RequestParam("file") MultipartFile dto) {
         boolean success = fileService.create(repositoryId, dto);
 
         if(!success) {
