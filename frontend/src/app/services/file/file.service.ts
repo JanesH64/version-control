@@ -20,7 +20,7 @@ export class FileService {
     return this.httpClient.get<TextFile>(`${environment.api}/files/${repositoryId}/${fileId}`);
   }
 
-  upload(file: File, repositoryId: string) {
+  upload(file: File, repositoryId: string): Observable<any> {
     const formData = new FormData();
     formData.append("file", file);
     return this.httpClient.post(`${environment.api}/files/${repositoryId}`, formData, {
@@ -29,7 +29,7 @@ export class FileService {
     });
   }
 
-  getVersions(repositoryId: string, fileId: string) {
+  getVersions(repositoryId: string, fileId: string): Observable<Array<TextFile>> {
     return this.httpClient.get<Array<TextFile>>(`${environment.api}/versions/${repositoryId}/${fileId}`)
   }
 
@@ -37,5 +37,9 @@ export class FileService {
     return this.httpClient.get(`${environment.api}/files/${fileId}/version/${id}`, {
       responseType: 'blob'
     });
+  }
+
+  lockFile(fileId: string | undefined): Observable<any> {
+    return this.httpClient.post(`${environment.api}/files/${fileId}/lock`, true);
   }
 }

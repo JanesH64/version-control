@@ -34,6 +34,7 @@ import { RepositoryComponent } from './repository/repository.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FileMetadataComponent } from './file-metadata/file-metadata.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     RepositoryComponent,
     FileUploadComponent,
     FileMetadataComponent,
-    OrderByPipe
+    OrderByPipe,
+    InfoDialogComponent
   ],
   imports: [
     BrowserModule,

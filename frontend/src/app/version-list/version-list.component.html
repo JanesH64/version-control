@@ -4,7 +4,7 @@
         <div class="scrollable-content" *ngIf="file">
             <div class="flex-row" *ngFor="let version of file.versions | keyvalue | orderBy:dateSortFn">
                 <button mat-list-item>
-                    <mat-icon mat-list-icon>description</mat-icon>
+                    <mat-icon mat-list-icon [ngClass]="{'head': version.value.head}">description</mat-icon>
                     <div mat-line>{{version.value.creationDate}}</div>
                 </button>
                 <div class="spacer"></div>

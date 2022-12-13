@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TextFile } from '../models/textFile';
 import { FileService } from '../services/file/file.service';
 import { saveAs } from 'file-saver';
+import { NotificationService } from '../services/notification/notification.service';
+import { DvDialogConfig } from '../models/dvDialogConfig';
 
 @Component({
   selector: 'app-file-details',
@@ -20,23 +22,51 @@ export class FileDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private fileService: FileService
+    private fileService: FileService,
+    private notificationService: NotificationService
   ) { 
     this.paramsSub = this.route.params.subscribe(params => {
       this.repositoryId = params['repositoryid'];
       this.fileId = params['fileid'];
-      this.loadFiles();
+      this.loadFile();
     });
   }
 
   ngOnInit(): void {
   }
 
-  loadFiles(): void {
+  loadFile(): void {
     this.isLoading = true;
     this.fileService.getById(this.repositoryId, this.fileId).subscribe((file) => {
       this.file = file;
-      this.isLoading = false;
+
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 500);
+    })
+  }
+
+  openDownloadDialog(): void {
+    let config: DvDialogConfig = {
+      title: "File download",
+      message: "Do you want to start editing and lock the file?",
+      buttons: [
+        {
+          text: "Download",
+          action: this.downloadFile.bind(this)
+        },
+        {
+          text: "Lock & Download",
+          action: this.lockAndDownload.bind(this)
+        }
+      ]
+    }
+    this.notificationService.confirm(config);
+  }
+
+  lockAndDownload(): void {
+    this.fileService.lockFile(this.file?.id).subscribe(() => {
+      this.loadFile();
     })
   }
 

@@ -49,7 +49,10 @@ export class RepositoryListComponent implements OnInit {
     this.isLoading = true;
     this.repositoryService.getAll().subscribe((repositories) => {
       this.repositories = repositories;
-      this.isLoading = false;
+
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 500);
     })
   }
 
