@@ -4,6 +4,6 @@
 </mat-dialog-content>
 <div mat-dialog-actions align="end">
     <ng-container *ngFor="let button of data.buttons">
-        <button mat-button mat-dialog-close (click)="button.action()" color="primary">{{button.text}}</button>
+        <button mat-button mat-dialog-close (click)="button.action()" [disabled]="button.disabled" color="primary">{{button.text}}</button>
     </ng-container>
 </div>

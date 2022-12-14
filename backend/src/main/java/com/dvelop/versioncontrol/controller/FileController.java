@@ -43,7 +43,13 @@ public class FileController {
     }
 
     @PostMapping("/api/files/{fileid}/lock")
-    public void LockFile(@PathVariable("fileid") String fileid, @RequestBody boolean lock) {
-        //Lock
+    public ResponseEntity<Boolean> LockFile(@PathVariable("fileid") String fileid, @RequestBody boolean lock) {
+        boolean success = fileService.lockFile(fileid);
+
+        if(!success) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

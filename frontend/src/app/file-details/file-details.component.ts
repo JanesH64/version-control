@@ -5,6 +5,8 @@ import { FileService } from '../services/file/file.service';
 import { saveAs } from 'file-saver';
 import { NotificationService } from '../services/notification/notification.service';
 import { DvDialogConfig } from '../models/dvDialogConfig';
+import { MatDialog } from '@angular/material/dialog';
+import { FileUploadComponent } from '../file-upload/file-upload.component';
 
 @Component({
   selector: 'app-file-details',
@@ -23,7 +25,8 @@ export class FileDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fileService: FileService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private dialog: MatDialog
   ) { 
     this.paramsSub = this.route.params.subscribe(params => {
       this.repositoryId = params['repositoryid'];
@@ -53,11 +56,13 @@ export class FileDetailsComponent implements OnInit {
       buttons: [
         {
           text: "Download",
-          action: this.downloadFile.bind(this)
+          action: this.downloadFile.bind(this),
+          disabled: false
         },
         {
           text: "Lock & Download",
-          action: this.lockAndDownload.bind(this)
+          action: this.lockAndDownload.bind(this),
+          disabled: this.file ? this.file.locked : false
         }
       ]
     }
@@ -66,11 +71,22 @@ export class FileDetailsComponent implements OnInit {
 
   lockAndDownload(): void {
     this.fileService.lockFile(this.file?.id).subscribe(() => {
+      this.downloadFile();
       this.loadFile();
     })
   }
 
   downloadFile(): void {
     this.fileService.downloadVersion(this.file?.id, this.file?.head.id).subscribe(blob => saveAs(blob, this.file?.name));;
+  }
+
+  openUploadDialog(): void {
+    this.dialog.open(FileUploadComponent, {
+      data: {
+        fileId: this.file?.id
+      }
+    }).afterClosed().subscribe(() => {
+      this.loadFile();
+    })
   }
 }

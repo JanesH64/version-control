@@ -7,13 +7,16 @@
   <ng-container *ngIf="!isLoading && file">
     <div class="toolbar-actions">
       <div>
-        <h1 class="file-header">{{file.name}}</h1>
+        <h1 class="file-header">
+          <span>{{file.name}}</span>
+            <mat-icon *ngIf="file.locked" title="This file is currently being edited">locked</mat-icon>
+        </h1>
       </div>
       <div class="spacer"></div>
-      <button mat-mini-fab color="primary" title="Download file" (click)="openDownloadDialog()">
+      <button mat-mini-fab color="primary" title="Download file" [disabled]="file.locked" (click)="openDownloadDialog()">
         <mat-icon>download</mat-icon>
       </button>
-      <button mat-mini-fab color="primary" title="Upload file">
+      <button mat-mini-fab color="primary" title="Upload file" [disabled]="!file.locked" (click)="openUploadDialog()">
         <mat-icon>upload</mat-icon>
       </button>
       <button mat-mini-fab color="primary" title="Delete file">

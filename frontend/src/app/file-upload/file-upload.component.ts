@@ -41,7 +41,16 @@ export class FileUploadComponent implements OnInit {
 
     this.uploadProgress = 0;
     this.uploadInProgress = true;
-    const upload$ = this.fileService.upload(file, this.data.repositoryId);
+
+    let upload$ = undefined;
+
+    if(this.data.repositoryId) {
+      upload$ = this.fileService.uploadNewFile(file, this.data.repositoryId);
+    }
+
+    if(this.data.fileId) {
+      upload$ = this.fileService.uploadNewVersion(file, this.data.fileId);
+    }
 
     // this.uploadSub = upload$.subscribe(
     //   event => {
@@ -64,7 +73,7 @@ export class FileUploadComponent implements OnInit {
     //     this.uploadSub.unsubscribe();
     //   });
 
-    this.uploadSub = upload$.subscribe({
+    this.uploadSub = upload$?.subscribe({
       next: (event: any) => {
         if (event.type == HttpEventType.UploadProgress) {
           if (event.total) {  

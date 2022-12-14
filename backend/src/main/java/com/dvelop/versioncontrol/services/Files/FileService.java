@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dvelop.versioncontrol.models.File;
+import com.dvelop.versioncontrol.models.FileData;
 import com.dvelop.versioncontrol.repository.FileRepository;
 
 @Service
@@ -51,7 +52,39 @@ public class FileService implements IFileService {
     }
 
     @Override
+    public boolean createNewVersion(String fileId, MultipartFile dto) {
+        if(fileId == null || fileId.trim().isEmpty()) {
+            return false;
+        }
+        
+        FileData version = new FileData(dto);
+        File file = fileStore.getById(fileId);
+
+        if(file != null) {
+            version.id = "v" + file.versions.size();
+            file.versions.put(version.id, version);
+            file.head = version;
+            file.locked = false;
+        }
+
+        fileStore.save(file);
+        return true;
+    }
+
+    @Override
     public boolean update(String repositoryId, String fileId, MultipartFile file) {
+        return true;
+    }
+
+    @Override
+    public boolean lockFile(String fileId) {
+        File file = fileStore.getById(fileId);
+        if(file.locked) {
+            return false;
+        }
+
+        file.locked = true;
+        fileStore.save(file);
         return true;
     }
 

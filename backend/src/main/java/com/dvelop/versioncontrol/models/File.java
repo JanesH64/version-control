@@ -14,6 +14,7 @@ public class File {
     public String repositoryId;
     public String name;
     public FileData head;
+    public boolean locked;
     public Map<String, FileData> versions;
     public File() {
     }
@@ -28,5 +29,6 @@ public class File {
         version.id = "v" + versions.size();
         versions.put(version.id, version);
         head = version;
+        locked = false;
     }
 }

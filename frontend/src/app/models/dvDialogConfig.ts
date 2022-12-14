@@ -5,6 +5,7 @@ export interface DvDialogConfig {
 }
 
 export interface Button {
-    text: string
-    action: () => void
+    text: string;
+    action: () => void;
+    disabled: boolean;
 }
