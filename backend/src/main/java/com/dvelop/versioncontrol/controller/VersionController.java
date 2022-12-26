@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +43,17 @@ public class VersionController {
     @PostMapping("/api/files/{fileid}/versions")
     public ResponseEntity<String> NewVersion(@PathVariable("fileid") String fileId, @RequestParam("file") MultipartFile dto) {
         boolean success = fileService.createNewVersion(fileId, dto);
+
+        if(!success) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PatchMapping("/api/files/{fileid}/versions/{id}/restore")
+    public ResponseEntity<String> RestoreVersion(@PathVariable("fileid") String fileId, @PathVariable("id") String versionId) {
+        boolean success = fileService.restoreVersion(fileId, versionId);
 
         if(!success) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

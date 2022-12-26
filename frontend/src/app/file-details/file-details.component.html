@@ -25,7 +25,7 @@
     </div>
     <div class="page-container">
       <div class="file-info">
-        <app-version-list [file]="file"></app-version-list>
+        <app-version-list [file]="file" (fileChanged)="handleFileChanged()"></app-version-list>
       </div>
       <div class="page">
         <p class="text-content">

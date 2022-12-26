@@ -47,4 +47,8 @@ export class FileService {
   lockFile(fileId: string | undefined): Observable<any> {
     return this.httpClient.post(`${environment.api}/files/${fileId}/lock`, true);
   }
+
+  restoreVersion(fileId: string | undefined, versionId: string): Observable<any> {
+    return this.httpClient.patch(`${environment.api}/files/${fileId}/versions/${versionId}/restore`, true)
+  }
 }

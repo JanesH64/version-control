@@ -60,12 +60,18 @@ public class FileService implements IFileService {
         FileData version = new FileData(dto);
         File file = fileStore.getById(fileId);
 
-        if(file != null) {
-            version.id = "v" + file.versions.size();
-            file.versions.put(version.id, version);
-            file.head = version;
-            file.locked = false;
+        if(file == null) {
+           return false;
         }
+
+        for(FileData v : file.versions.values()) {
+            v.head = false;
+        }
+
+        version.id = "v" + file.versions.size();
+        file.versions.put(version.id, version);
+        file.head = version;
+        file.locked = false;
 
         fileStore.save(file);
         return true;
@@ -85,6 +91,26 @@ public class FileService implements IFileService {
 
         file.locked = true;
         fileStore.save(file);
+        return true;
+    }
+
+    @Override
+    public boolean restoreVersion(String fileId, String versionId) {
+        File file = fileStore.getById(fileId);
+
+        FileData version = file.versions.get(versionId);
+        if(version == null) {
+            return false;
+        }
+
+        for(FileData v : file.versions.values()) {
+            v.head = false;
+        }
+
+        version.head = true;
+
+        fileStore.save(file);
+
         return true;
     }
 

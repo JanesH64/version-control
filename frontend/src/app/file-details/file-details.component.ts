@@ -89,4 +89,8 @@ export class FileDetailsComponent implements OnInit {
       this.loadFile();
     })
   }
+
+  handleFileChanged() {
+    this.loadFile();
+  }
 }
