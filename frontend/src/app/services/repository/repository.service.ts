@@ -17,6 +17,10 @@ export class RepositoryService {
     return this.httpClient.get<Array<Repository>>(`${environment.api}/repositories`);
   }
 
+  get(repositoryId: string): Observable<Repository> {
+    return this.httpClient.get<Repository>(`${environment.api}/repositories/${repositoryId}`);
+  }
+
   add(name: string): Observable<void> {
     return this.httpClient.post<void>(`${environment.api}/repositories`, name);
   }
