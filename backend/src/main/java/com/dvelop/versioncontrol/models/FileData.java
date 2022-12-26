@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileData {
@@ -18,7 +19,7 @@ public class FileData {
 
     public FileData() {}
     public FileData(MultipartFile file) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         creationDate = df.format(Calendar.getInstance().getTime());
         lastUpdate = df.format(Calendar.getInstance().getTime());
         head = true;

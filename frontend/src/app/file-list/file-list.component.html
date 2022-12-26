@@ -9,7 +9,7 @@
       [routerLink]="['files', file.id]">
         <mat-icon mat-list-icon>description</mat-icon>
         <div mat-line>{{file.name}}</div> 
-        <div mat-subheader>Last Update: {{file.head.lastUpdate}}</div>   
+        <div mat-subheader>Last Update: {{file.head.lastUpdate | date: "medium"}}</div>   
       </button>
     </div>
   </mat-action-list>

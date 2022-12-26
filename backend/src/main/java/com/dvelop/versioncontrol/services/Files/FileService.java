@@ -1,5 +1,8 @@
 package com.dvelop.versioncontrol.services.Files;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -108,6 +111,8 @@ public class FileService implements IFileService {
         }
 
         version.head = true;
+        version.lastUpdate = getCurrentTime();
+        file.head = version;
 
         fileStore.save(file);
 
@@ -165,5 +170,10 @@ public class FileService implements IFileService {
         }
 
         return -1;
+    }
+
+    private String getCurrentTime() {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        return df.format(Calendar.getInstance().getTime());
     }
 }
