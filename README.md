@@ -6,7 +6,7 @@ University project: Simple version control for text files
 - [x] Get file with or without a lock 
 - [x] Upload and update an existing file and release the lock 
 - [x] Upload new files 
-- [ ] Access and restore old versions 
+- [x] Access and restore old versions 
 - [ ] Add tags (e.g. "Version 1.0" 
 - [x] Compare two versions
 - [x] Centralized repository 
