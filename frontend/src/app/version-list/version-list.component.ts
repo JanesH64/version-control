@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { FileData } from '../models/fileData';
 import { TextFile } from '../models/textFile';
 import { FileService } from '../services/file/file.service';
+import { NotificationService } from '../services/notification/notification.service';
+import { TagDialogComponent } from '../tag-dialog/tag-dialog.component';
 
 @Component({
   selector: 'app-version-list',
@@ -18,7 +21,9 @@ export class VersionListComponent implements OnInit {
   public fileChanged: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    private fileService: FileService
+    private fileService: FileService,
+    private dialog: MatDialog,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -33,9 +38,25 @@ export class VersionListComponent implements OnInit {
   }
 
   restoreVersion(versionId: string) {
-    console.log("Restore")
     this.fileService.restoreVersion(this.file?.id, versionId).subscribe(() => {
       this.fileChanged.emit("File Changed");
+    })
+  }
+
+  openTagDialog(version: FileData) {
+    let dialogRef = this.dialog.open(TagDialogComponent, {
+      data: version,
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(tags => {
+      if(!tags) return;
+
+      version.tags = tags;
+      this.fileService.updateVersion(version, this.file?.id).subscribe(() => {
+        this.notificationService.success("Saved tags successfully!");
+        this.fileChanged.emit("File changed");
+      })
     })
   }
 }

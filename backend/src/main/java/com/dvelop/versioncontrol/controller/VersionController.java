@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,6 +39,17 @@ public class VersionController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.name + "\"")
                 .body(version.data);
+    }
+
+    @PatchMapping("/api/files/{fileid}/versions/{id}")
+    public ResponseEntity<String> UpdateVersion(@PathVariable("fileid") String fileId, @PathVariable("id") String versionId, @RequestBody FileData version) {
+        boolean success = fileService.updateVersion(fileId, versionId, version);
+
+        if(!success) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/api/files/{fileid}/versions")

@@ -23,6 +23,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider'; 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
 import {MatTabsModule} from '@angular/material/tabs'; 
+import {MatChipsModule} from '@angular/material/chips';
 
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 
@@ -35,6 +36,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FileMetadataComponent } from './file-metadata/file-metadata.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
+import { TagDialogComponent } from './tag-dialog/tag-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
     FileUploadComponent,
     FileMetadataComponent,
     OrderByPipe,
-    InfoDialogComponent
+    InfoDialogComponent,
+    TagDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,8 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
     MatMenuModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatChipsModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {delay: 200}}

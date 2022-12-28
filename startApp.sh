@@ -1,12 +1,12 @@
-# #!/bin/bash
-# cd frontend
-# npm install
-# npm run build
+#!/bin/bash
+cd frontend
+npm install
+npm run build
 
-# cd ..
-# cd backend
-# ./mvnw clean
-# ./mvnw package
+cd ..
+cd backend
+./mvnw clean
+./mvnw package
 
-# cd ..
+cd ..
 docker-compose up --build --force-recreate

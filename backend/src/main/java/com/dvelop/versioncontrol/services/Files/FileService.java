@@ -119,6 +119,22 @@ public class FileService implements IFileService {
         return true;
     }
 
+    @Override
+    public boolean updateVersion(String fileId, String versionId, FileData version) {
+        File file = fileStore.getById(fileId);
+
+        if(version == null) {
+            return false;
+        }
+
+        version.lastUpdate = getCurrentTime();
+        file.versions.replace(versionId, version);
+
+        fileStore.save(file);
+
+        return true;
+    }
+
     private boolean isDuplicateName(File file) {
         List<File> filesInRepository = fileStore.getByRepositoryId(file.repositoryId);
         logger.info(""+filesInRepository.size());

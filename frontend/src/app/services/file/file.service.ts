@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { FileData } from 'src/app/models/fileData';
 import { TextFile } from 'src/app/models/textFile';
 import { environment } from 'src/environments/environment';
 
@@ -42,6 +43,10 @@ export class FileService {
       reportProgress: true,
       observe: 'events'
     });
+  }
+
+  updateVersion(version: FileData, fileId: string | undefined): Observable<any> {
+    return this.httpClient.patch(`${environment.api}/files/${fileId}/versions/${version.id}`, version);
   }
 
   lockFile(fileId: string | undefined): Observable<any> {

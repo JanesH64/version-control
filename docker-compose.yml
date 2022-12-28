@@ -8,9 +8,9 @@ services:
       - 27017:27017
     volumes:
       - ./data/mongo:/data/db
-  # app:
-  #   build: .
-  #   ports:
-  #     - 8181:8181
-  #   depends_on:
-  #     - mongo
+  app:
+    build: .
+    ports:
+      - 8181:8181
+    depends_on:
+      - mongo
