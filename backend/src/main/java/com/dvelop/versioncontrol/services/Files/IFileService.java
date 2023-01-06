@@ -14,7 +14,6 @@ public interface IFileService {
     public boolean create(String repositoryId, MultipartFile dto);
     public boolean createNewVersion(String fileId, MultipartFile dto);
     public boolean restoreVersion(String fileId, String versionId);
-    public boolean update(String repositoryId, String fileId, MultipartFile dto);
     public boolean lockFile(String fileId);
     public boolean updateVersion(String fileId, String versionId, FileData version);
 }

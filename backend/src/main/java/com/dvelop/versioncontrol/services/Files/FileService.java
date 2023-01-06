@@ -44,6 +44,10 @@ public class FileService implements IFileService {
         if(repositoryId == null || repositoryId.trim().isEmpty()) {
             return false;
         }
+
+        if(dto == null) {
+            return false;
+        }
         
         File file = new File(repositoryId, dto);
         if(isDuplicateName(file)) {
@@ -77,11 +81,6 @@ public class FileService implements IFileService {
         file.locked = false;
 
         fileStore.save(file);
-        return true;
-    }
-
-    @Override
-    public boolean update(String repositoryId, String fileId, MultipartFile file) {
         return true;
     }
 
