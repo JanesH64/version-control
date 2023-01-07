@@ -7,9 +7,12 @@ University project: Simple version control for text files
 - [x] Upload and update an existing file and release the lock 
 - [x] Upload new files 
 - [x] Access and restore old versions 
-- [ ] Add tags (e.g. "Version 1.0" 
+- [x] Add tags (e.g. "Version 1.0" 
 - [x] Compare two versions
 - [x] Centralized repository 
+- [ ] One unittests class
+- [ ] Implement logging for one service
+
  
 ## Build project
 ### Requirements
