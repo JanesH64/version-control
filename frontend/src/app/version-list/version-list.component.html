@@ -24,6 +24,10 @@
                         <mat-icon>delete</mat-icon>
                         <span>Delete</span>
                     </button>
+                    <button mat-menu-item *ngIf="file.versions.size > 1" (click)="compareVersion(version.value)">
+                        <mat-icon>compare</mat-icon>
+                        <span>Compare</span>
+                    </button>
                 </mat-menu>
             </div>
         </div>

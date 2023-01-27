@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { CompareVersionComponent } from '../compare-version/compare-version.component';
 import { FileData } from '../models/fileData';
 import { TextFile } from '../models/textFile';
 import { FileService } from '../services/file/file.service';
@@ -58,5 +59,17 @@ export class VersionListComponent implements OnInit {
         this.fileChanged.emit("File changed");
       })
     })
+  }
+
+  compareVersion(version: FileData) {
+    if(!this.file) return; 
+
+    let map = new Map(Object.entries(this.file.versions));
+    let vals = Array.from(map.values());
+    
+    let versions = vals.filter(v => {
+      return v?.id != version.id; 
+    });
+    this.dialog.open(CompareVersionComponent, { data: {version: version, versions: versions}});
   }
 }

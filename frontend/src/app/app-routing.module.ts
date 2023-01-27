@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CompareVersionComponent } from './compare-version/compare-version.component';
 import { FileDetailsComponent } from './file-details/file-details.component';
 import { RepositoryDetailsComponent } from './repository-details/repository-details.component';
 import { RepositoryListComponent } from './repository-list/repository-list.component';
@@ -12,7 +13,7 @@ const routes: Routes = [
       { path: '', component: RepositoryDetailsComponent},
       { path: 'files/:fileid', component: FileDetailsComponent}
     ]
-  }
+  },
 ];
 
 @NgModule({

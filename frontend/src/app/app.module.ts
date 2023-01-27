@@ -37,6 +37,9 @@ import { FileMetadataComponent } from './file-metadata/file-metadata.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { TagDialogComponent } from './tag-dialog/tag-dialog.component';
+import { CompareVersionComponent } from './compare-version/compare-version.component';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+import {MatSelectModule} from '@angular/material/select'; 
 
 @NgModule({
   declarations: [
@@ -53,7 +56,8 @@ import { TagDialogComponent } from './tag-dialog/tag-dialog.component';
     FileMetadataComponent,
     OrderByPipe,
     InfoDialogComponent,
-    TagDialogComponent
+    TagDialogComponent,
+    CompareVersionComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +80,9 @@ import { TagDialogComponent } from './tag-dialog/tag-dialog.component';
     MatDividerModule,
     MatProgressSpinnerModule,
     MatTabsModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSelectModule,
+    MonacoEditorModule.forRoot()
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {delay: 200}}
