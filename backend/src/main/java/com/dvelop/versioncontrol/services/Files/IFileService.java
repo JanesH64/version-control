@@ -16,4 +16,6 @@ public interface IFileService {
     public boolean restoreVersion(String fileId, String versionId);
     public boolean lockFile(String fileId);
     public boolean updateVersion(String fileId, String versionId, FileData version);
+    public boolean deleteFile(String fileId);
+    public boolean deleteVersion(String fileId, String versionId);
 }

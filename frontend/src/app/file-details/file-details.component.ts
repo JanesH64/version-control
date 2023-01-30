@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TextFile } from '../models/textFile';
 import { FileService } from '../services/file/file.service';
 import { saveAs } from 'file-saver';
@@ -26,10 +26,15 @@ export class FileDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private fileService: FileService,
     private notificationService: NotificationService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router,
   ) { 
-    this.paramsSub = this.route.params.subscribe(params => {
+
+    this.route.parent?.params.subscribe((params) => {
       this.repositoryId = params['repositoryid'];
+    });
+
+    this.paramsSub = this.route.params.subscribe(params => {
       this.fileId = params['fileid'];
       this.loadFile();
     });
@@ -43,6 +48,11 @@ export class FileDetailsComponent implements OnInit {
     this.fileService.getById(this.repositoryId, this.fileId).subscribe((file) => {
       this.file = file;
 
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 500);
+    }, 
+    (error) => {
       setTimeout(() => {
         this.isLoading = false;
       }, 500);
@@ -92,5 +102,14 @@ export class FileDetailsComponent implements OnInit {
 
   handleFileChanged() {
     this.loadFile();
+  }
+
+  deleteFile() {
+    if(!this.file) return;
+
+    this.fileService.deleteFile(this.file.id).subscribe(() => {
+      this.notificationService.success("File deleted successfully!");
+      this.router.navigateByUrl(`/repositories/${this.repositoryId}`)
+    });
   }
 }

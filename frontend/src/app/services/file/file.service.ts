@@ -56,4 +56,12 @@ export class FileService {
   restoreVersion(fileId: string | undefined, versionId: string): Observable<any> {
     return this.httpClient.patch(`${environment.api}/files/${fileId}/versions/${versionId}/restore`, true)
   }
+
+  deleteFile(fileId: string) {
+    return this.httpClient.delete(`${environment.api}/files/${fileId}`);
+  }
+
+  deleteVersion(fileId: string, versionId: string) {
+    return this.httpClient.delete(`${environment.api}/files/${fileId}/versions/${versionId}`);
+  }
 }

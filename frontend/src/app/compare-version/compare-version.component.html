@@ -10,6 +10,6 @@
     <div class="flex-container" *ngIf="!selectedVersion">
         <h1>Please select a version to compare</h1>
     </div>
-    <ngx-monaco-diff-editor class="template-editor" *ngIf="selectedVersion" [options]="codeEditorOptions" [originalModel]="originalVersion"
-        [modifiedModel]="versionToCompare"></ngx-monaco-diff-editor>
+    <ngx-monaco-diff-editor class="template-editor" *ngIf="selectedVersion" [options]="codeEditorOptions" [modifiedModel]="originalVersion"
+        [originalModel]="versionToCompare"></ngx-monaco-diff-editor>
 </div>

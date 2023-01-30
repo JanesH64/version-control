@@ -1,5 +1,5 @@
 <div class="flex-container">
-  <ng-container *ngIf="isLoading || !file">
+  <ng-container *ngIf="isLoading">
     <div class="flex-center">
       <mat-spinner></mat-spinner>
     </div>
@@ -19,7 +19,7 @@
       <button mat-mini-fab color="primary" title="Upload file" [disabled]="!file.locked" (click)="openUploadDialog()">
         <mat-icon>upload</mat-icon>
       </button>
-      <button mat-mini-fab color="primary" title="Delete file">
+      <button mat-mini-fab color="primary" title="Delete file" (click)="deleteFile()">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
@@ -32,6 +32,12 @@
           {{file.head.content}}
         </p>
       </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!isLoading && !file">
+    <div class="flex-center">
+      <h1>File does not exist or might have been deleted</h1>
+      <h4>Check if the given file id is correct</h4>
     </div>
   </ng-container>
 </div>

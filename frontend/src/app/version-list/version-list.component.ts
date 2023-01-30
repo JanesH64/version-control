@@ -1,8 +1,10 @@
+import { KeyValue } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CompareVersionComponent } from '../compare-version/compare-version.component';
 import { FileData } from '../models/fileData';
 import { TextFile } from '../models/textFile';
+import { ErrorHandlerService } from '../services/error/error-handler.service';
 import { FileService } from '../services/file/file.service';
 import { NotificationService } from '../services/notification/notification.service';
 import { TagDialogComponent } from '../tag-dialog/tag-dialog.component';
@@ -24,11 +26,20 @@ export class VersionListComponent implements OnInit {
   constructor(
     private fileService: FileService,
     private dialog: MatDialog,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private errorHandlerService: ErrorHandlerService,
   ) { }
 
   ngOnInit(): void {
    
+  }
+
+  getVersions() {
+    if(!this.file) return []
+    let map = new Map(Object.entries(this.file.versions));
+    let vals = Array.from(map.values());
+
+    return vals;
   }
 
   dateSortFn(a: FileData, b: FileData): Number {
@@ -62,14 +73,27 @@ export class VersionListComponent implements OnInit {
   }
 
   compareVersion(version: FileData) {
-    if(!this.file) return; 
+    let vals = this.getVersions();
 
-    let map = new Map(Object.entries(this.file.versions));
-    let vals = Array.from(map.values());
-    
     let versions = vals.filter(v => {
       return v?.id != version.id; 
     });
     this.dialog.open(CompareVersionComponent, { data: {version: version, versions: versions}});
+  }
+
+  valueDescOrder = (a: KeyValue<string,FileData>, b: KeyValue<string,FileData>): number => {
+    return a.value.lastUpdate.localeCompare(b.value.lastUpdate) * -1;
+  }
+
+  deleteVersion(id: string) {
+    if(!this.file) return;
+
+    this.fileService.deleteVersion(this.file.id, id).subscribe(() => {
+      this.notificationService.success("Version deleted successfully!");
+      this.fileChanged.emit("Version deleted");
+    },
+    () => {
+      this.errorHandlerService.handleErrorMessage("Version could not be deleted!");
+    })
   }
 }

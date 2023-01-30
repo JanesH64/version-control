@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,6 +67,17 @@ public class VersionController {
     @PatchMapping("/api/files/{fileid}/versions/{id}/restore")
     public ResponseEntity<String> RestoreVersion(@PathVariable("fileid") String fileId, @PathVariable("id") String versionId) {
         boolean success = fileService.restoreVersion(fileId, versionId);
+
+        if(!success) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("api/files/{fileid}/versions/{id}")
+    public ResponseEntity<Boolean> DeleteFile(@PathVariable("fileid") String fileid, @PathVariable("id") String versionId) {
+        boolean success = fileService.deleteVersion(fileid, versionId);
 
         if(!success) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -5,12 +5,21 @@
   <mat-action-list>
     <span mat-subheader class="list-header">Files</span>
     <div class="scrollable-content">
-      <button mat-list-item *ngFor="let file of files | orderBy:sortByNameFn"
-      [routerLink]="['files', file.id]">
-        <mat-icon mat-list-icon>description</mat-icon>
-        <div mat-line>{{file.name}}</div> 
-        <div mat-subheader>Last Update: {{file.head.lastUpdate | date: "medium"}}</div>   
-      </button>
+      <ng-container *ngIf="files && files.length > 0">
+        <button mat-list-item *ngFor="let file of files | orderBy:sortByNameFn"
+        [routerLink]="['files', file.id]">
+          <mat-icon mat-list-icon>description</mat-icon>
+          <div mat-line>{{file.name}}</div> 
+          <div mat-subheader>Last Update: {{file.head.lastUpdate | date: "medium"}}</div>   
+        </button>
+      </ng-container>
+      <ng-container *ngIf="!files || files.length == 0">
+        <div class="flex-center">
+          <h1>It's quite empty in here 🥱</h1>
+          <h4>Start by adding some files to your repository</h4>
+        </div>
+      </ng-container>
     </div>
+
   </mat-action-list>
 </div>

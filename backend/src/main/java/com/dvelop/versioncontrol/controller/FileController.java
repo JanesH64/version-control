@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,8 +28,14 @@ public class FileController {
     }
 
     @GetMapping("/api/files/{repositoryid}/{fileid}")
-    public File GetFile(@PathVariable("repositoryid") String repositoryId, @PathVariable("fileid") String fileId) {
-        return fileService.getById(repositoryId, fileId);
+    public ResponseEntity<File> GetFile(@PathVariable("repositoryid") String repositoryId, @PathVariable("fileid") String fileId) {
+        File file = fileService.getById(repositoryId, fileId);
+
+        if(file != null) {
+            return new ResponseEntity<File>(file, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
     @PostMapping("/api/files/{repositoryid}")
@@ -45,6 +52,17 @@ public class FileController {
     @PostMapping("/api/files/{fileid}/lock")
     public ResponseEntity<Boolean> LockFile(@PathVariable("fileid") String fileid, @RequestBody boolean lock) {
         boolean success = fileService.lockFile(fileid);
+
+        if(!success) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("api/files/{fileid}")
+    public ResponseEntity<Boolean> DeleteFile(@PathVariable("fileid") String fileid) {
+        boolean success = fileService.deleteFile(fileid);
 
         if(!success) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
