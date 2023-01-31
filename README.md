@@ -10,8 +10,9 @@ University project: Simple version control for text files
 - [x] Add tags (e.g. "Version 1.0" 
 - [x] Compare two versions
 - [x] Centralized repository 
-- [ ] One unittests class
-- [ ] Implement logging for one service
+- [x] One unittests class
+- [x] Implement logging for one service
+- [ ] Use checkstyle on one class
 
  
 ## Build project
